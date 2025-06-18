@@ -1,0 +1,76 @@
+<%- layout("/layouts/boilerplate") %>
+<body>
+  <div class="row">
+    <div class="col-8 offset-2">
+      <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+        <h2 class="my-2">Update Details</h2>
+        <div class="my-1">
+          <label for="title" class="form-label">Title</label>
+
+          <input
+            name="listing[title]"
+            value="<%= listing.title %>"
+            type="text"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="my-1">
+          <label for="description" class="form-label">Description</label>
+
+          <textarea
+            name="listing[description]"
+            rows="2"
+            cols="23"
+            class="form-control"
+          >
+<%= listing.description %></textarea
+          >
+        </div>
+        <div class="my-1">
+          <label for="image" class="form-label">Image</label>
+
+          <input
+            name="listing[image][url]"
+            value="<%= listing.image.url %>"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="row">
+          <div class="my-1 col-md-4">
+          <label for="price" class="form-label">Price</label>
+
+          <input
+            name="listing[price]"
+            value="<%= listing.price %>"
+            type="number"
+            class="form-control"
+          />
+        </div>
+        <div class="my-1 col-md-8" >
+          <label for="location" class="form-label">Location</label>
+
+          <input
+            name="listing[location]"
+            value="<%= listing.location %>"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        </div>
+        <div class="my-1">
+          <label for="country" class="form-label">Country</label>
+
+          <input
+            name="listing[country]"
+            value="<%= listing.country %>"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <button class="btn btn-warning my-2" type="submit">Edit</button>
+      </form>
+    </div>
+  </div>
+</body>
