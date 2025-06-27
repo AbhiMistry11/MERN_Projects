@@ -5,65 +5,105 @@
     <div class="col-8 offset-2">
       <h2 class="my-4"><%= listing.title %></h2>
       <div class="card listing-card mb-4">
-        <div class="row ">
+        <div class="row">
           <div class="col-md-5 mb-sm-4">
-            <img src="<%= listing.image.url %>" class="img-fluid rounded h-100 w-100 object-fit-cover" alt="Listing Image" />
+            <img
+              src="<%= listing.image.url %>"
+              class="img-fluid rounded h-100 w-100 object-fit-cover"
+              alt="Listing Image"
+            />
           </div>
           <div class="col-md-7">
             <div class="card-body">
               <h4 class="card-title mb-3">Listing Details</h4>
+              <i><h5>Owned By <%= listing.owner.username %></h5></i>
               <p class="card-text"><%= listing.description %></p>
-              <p><strong>Price:</strong> ₹<%= listing.price.toLocaleString("en-IN") %></p>
+              <p>
+                <strong>Price:</strong> ₹<%=
+                listing.price.toLocaleString("en-IN") %>
+              </p>
               <p><strong>Location:</strong> <%= listing.location %></p>
               <p><strong>Country:</strong> <%= listing.country %></p>
-
+              <% if(currUser && listing.owner._id.equals(currUser._id)){ %>
               <div class="d-flex gap-2 mt-4">
-                <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit</a>
-                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                <a
+                  href="/listings/<%= listing._id %>/edit"
+                  class="btn btn-warning"
+                  >Edit</a
+                >
+                <form
+                  method="POST"
+                  action="/listings/<%= listing._id %>?_method=DELETE"
+                >
                   <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
               </div>
+            <% } %>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
-  <hr>
-  <div class="col-8 offset-2 ">
+  <hr />
+  <div class="col-8 offset-2">
+    <% if(currUser){ %>
     <h4>Leave Review</h4>
-    <form action="/listings/<%= listing._id %>/reviews" method="post" novalidate class="needs-validation">
-   <div>
-    <label class="form-label" for="rating">Rating</label>
-    <input class="form-range" type="range" min="1" max="5" id="rating" name="review[rating]">
-   </div>
-   <div>
-    <label class="form-label" for="comment">Comment</label>
-    <textarea class="form-control" name="review[comment]" id="comment" cols="30" rows="5" required></textarea>
-    <div class="valid-feedback">Looks Good</div>
-   </div>
-   <button class="btn btn-primary my-2">Submit</button>
+    <form
+      action="/listings/<%= listing._id %>/reviews"
+      method="post"
+      novalidate
+      class="needs-validation"
+    >
+      <div>
+        <label class="form-label" for="rating">Rating</label>
+        <input
+          class="form-range"
+          type="range"
+          min="1"
+          max="5"
+          id="rating"
+          name="review[rating]"
+        />
+      </div>
+      <div>
+        <label class="form-label" for="comment">Comment</label>
+        <textarea
+          class="form-control"
+          name="review[comment]"
+          id="comment"
+          cols="30"
+          rows="5"
+          required
+        ></textarea>
+        <div class="valid-feedback">Looks Good</div>
+      </div>
+      <button class="btn btn-primary my-2">Submit</button>
     </form>
+    <% } %>
   </div>
-  <hr>
-  <div class="col-8 offset-2 ">
-   <h2>All Reviews</h2>
+  <div class="col-8 offset-2">
+    <h2>All Reviews</h2>
     <div class="row">
-    <% for(let review of listing.reviews) { %>
-    <div class="card col-5 p-3 m-2">
-     <div class="card-body">
-      <h5 class="card-title">John Doe</h5>
-      <p class="card-text"><%= review.comment %></p>
-      <p class="card-text"><%= review.rating %>★ Stars</p>
-<p class="card-text"><%= review.createdAt.toString().split('GMT')[0].trim() %></p>
-      <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-        <button class="btn btn-danger">Delete</button>
-      </form>
-     </div>
+      <% for(let review of listing.reviews) { %>
+      <div class="card col-5 p-3 m-2">
+        <div class="card-body">
+          <h5 class="card-title">@<%= review.author.username %></h5>
+          <p class="card-text"><%= review.comment %></p>
+          <p class="card-text"><%= review.rating %>★ Stars</p>
+          <p class="card-text">
+            <%= review.createdAt.toString().split('GMT')[0].trim() %>
+          </p>
+          <form
+            method="post"
+            action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+          >
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% } %>
     </div>
-   <% } %>
-   </div>
   </div>
   <script src="/js/script.js"></script>
 </body>
