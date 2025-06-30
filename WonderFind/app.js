@@ -1,7 +1,6 @@
-if(process.env.NODE_ENV != "production"){
-  require('dotenv').config()
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
 }
-
 
 const express = require("express");
 const app = express();
@@ -20,15 +19,15 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-const sessionOptions ={
-    secret : "mysupersecretcode",
-    resave:false,
-    saveUninitialized: true,
-    cookie:{
-      expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-      maxAge:  7 * 24 * 60 * 60 * 1000,
-      httpOnly:true
-    }
+const sessionOptions = {
+  secret: "mysupersecretcode",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
 };
 
 app.set("view engine", "ejs");
@@ -48,10 +47,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
- res.locals.success = req.flash("success");
- res.locals.error = req.flash("error");
- res.locals.currUser = req.user;
- next();
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
+  next();
 });
 
 main()
@@ -79,14 +78,12 @@ app.get("/", (req, res) => {
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
-app.use("/",userRouter);
-
+app.use("/", userRouter);
 
 app.use((err, req, res, next) => {
   const { status = 500, message = "Something went wrong" } = err;
   res.status(status).render("error.ejs", { message });
 });
-
 
 app.listen(8080, () => {
   console.log("app is listening on 8080");

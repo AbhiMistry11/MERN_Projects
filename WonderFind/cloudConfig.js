@@ -11,7 +11,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "wonderfind_dev",
-    allowed_formats: ["png", "jpg", "jpeg"],  // ✅ Correct spelling
+    allowed_formats: ["png", "jpg", "jpeg"],  
   },
 });
 
