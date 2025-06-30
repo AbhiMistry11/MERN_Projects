@@ -40,10 +40,10 @@ module.exports.validateListing = (req, res, next) => {
 };
 
 module.exports.validateReview = (req, res, next) => {
-  let { error } = reviewSchema.validate(req.body);
-
+  const { error } = reviewSchema.validate(req.body);
   if (error) {
-    throw new ExpressError(500, error);
+    const msg = error.details.map(el => el.message).join(", ");
+    throw new ExpressError(400, msg);
   } else {
     next();
   }
