@@ -63,9 +63,7 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
-app.get("/", (req, res) => {
-  res.send("Hii, I Am Root");
-});
+
 
 // app.get("/demouser",async(req,res)=>{
 //   let fakeUser = new User({

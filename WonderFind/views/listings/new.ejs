@@ -1,72 +1,62 @@
-
-  <%- layout("/layouts/boilerplate") %>
+<%- layout("/layouts/boilerplate") %>
   <body>
-    <div class="row">
-      <div class="col-8 offset-2">
-    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
-      <h2 class="my-2">Enter Details</h2>
-      <div class="my-1">
-        <label for="title" class="form-label">Title</label>
-      <input name="listing[title]" placeholder="Enter Title" type="text" class="form-control" required />
-      <div class="valid-feedback">
-      Looks good!
-    </div>
+    <div class="container my-2">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+            <h2 class="mb-4 text-center">Create New Listing</h2>
+            
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input name="listing[title]" placeholder="Enter Title" type="text" class="form-control" required />
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Please provide a valid title.</div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea name="listing[description]" rows="4" placeholder="Enter Description" class="form-control w-100" required></textarea>
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Please provide a description.</div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="image" class="form-label">Upload Image</label>
+              <input name="listing[image]" type="file" class="form-control" required />
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Please upload an image.</div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="price" class="form-label">Price</label>
+                <div class="input-group">
+                  <input name="listing[price]" placeholder="0.00" class="form-control" required />
+                </div>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please enter a valid price.</div>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="location" class="form-label">Location</label>
+                <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control" required/>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please provide a location.</div>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <label for="country" class="form-label">Country</label>
+              <input name="listing[country]" placeholder="Enter Country" type="text" class="form-control" required/>
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Please provide a country.</div>
+            </div>
+            
+            <div class="d-grid">
+              <button class="btn btn-primary">Add Listing</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="my-1">
-        <label for="description" class="form-label">Description</label>
-        <textarea
-        name="listing[description]"
-        rows="2"
-        cols="23"
-        placeholder="Enter Description"
-        class="form-control"
-        required
-      ></textarea>
-       <div class="valid-feedback">
-      Looks good!
-    </div>
-      </div> 
-      <div class="my-1">
-        <label for="image" class="form-label">Upload Image</label>
-         <input name="listing[image]"  type="file" class="form-control" required />
-          <div class="valid-feedback">
-      Looks good!
-    </div>
-      </div>
-      <div class="row">
-        <div class="my-2 col-md-4">
-         <label for="price" class="form-label">Price</label>
-      <input name="listing[price]" placeholder="Enter Price"  class="form-control" required/>
-       <div class="valid-feedback">
-      Looks good!
-    </div>
-        <div class="invalid-feedback">
-     Please Enter Valid Price!!
-    </div>
-      </div>
-      <div class="my-2 col-md-8">
- <label for="location" class="form-label">Location</label>
-      <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control" required/>
-       <div class="valid-feedback">
-      Looks good!
-    </div>
-         <div class="invalid-feedback">
-     Please Enter Valid Location!!
-    </div>
-      </div>
-      </div>
-      <div class="my-1">
-  <label for="country" class="form-label">Country</label>
-      <input name="listing[country]" placeholder="Enter Country" type="text"  class="form-control" required/>
-       <div class="valid-feedback">
-      Looks good!
-    </div>
-         <div class="invalid-feedback">
-     Please Enter Valid Country!!
-    </div>
-      </div>
-      <button class="btn btn-primary my-2">Add</button>
-    </form>
-    </div>
     </div>
   </body>
